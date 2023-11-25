@@ -6,6 +6,7 @@ import { setTotalPrice, clearCart } from '../../../redux/cart/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import BusketBlock from '../../../components/BusketBlock';
+import cartEmptyPic from '../../../assets/img/cartEmpty.png';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,18 @@ const Cart = () => {
   };
 
   if (itemsCart.length === 0) {
-    return <h1 style={{ marginBottom: '10px' }}>Это корзина и она пуста</h1>;
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: '20px',
+        }}>
+        <h1 style={{ marginBottom: '50px' }}>Это корзина и она пуста</h1>
+        <img src={cartEmptyPic} style={{ width: '500px' }} alt="" />
+      </div>
+    );
   }
 
   return (
