@@ -1,0 +1,122 @@
+@import '../variables';
+.favorites {
+  padding: 0 10px;
+  margin-bottom: 32px;
+  &__addToCart {
+    position: relative;
+    background-color: $color_icon;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    .cartIcon {
+    }
+
+    .cartButton {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+
+  @keyframes animTooltip {
+    0% {
+      transform: translateY(100px);
+    }
+    50% {
+      transform: translateY(50px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .tooltip-isTovarInCart-wrap {
+    position: absolute;
+    height: 80px;
+    top: -85px;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    transform: translateY(0px);
+    animation-name: animTooltip; /* Имя анимации */
+    animation-duration: 3.4s; /* Длительность анимации */
+    animation-timing-function: ease; /* Функция времени (необязательно) */
+    animation-delay: 0s; /* Задержка (необязательно) */
+
+    .closeIco {
+      position: relative;
+      top: -60px;
+      right: -70px;
+      opacity: 0.5;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -10px; /* Ширина выступа */
+      border-width: 10px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    .tooltip-isTovarInCart {
+      text-align: center;
+    }
+  }
+
+  &__tovar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    width: 100%;
+    background-color: #ebf4fd;
+    gap: 24px;
+    border-radius: 4px;
+  }
+
+  &__img {
+    width: 150px;
+    padding: 8px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0px;
+    gap: 24px;
+  }
+
+  &__title {
+    display: inline-block;
+  }
+
+  &__buts {
+    display: flex;
+    align-items: center;
+  }
+
+  &__but {
+    cursor: pointer;
+    &:hover {
+      color: crimson;
+    }
+  }
+  &__but-text {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+
+  &__price {
+  }
+
+  &__addToCart {
+  }
+}

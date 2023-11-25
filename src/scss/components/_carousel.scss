@@ -1,0 +1,102 @@
+@import '../variables';
+
+.carousel-wrapper {
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  .arrow {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-30%);
+    z-index: 8;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    padding: 8px;
+    cursor: pointer;
+    background-color: $color_icon;
+  }
+  .arrowBack {
+    left: -18px;
+    background-color: $color_icon;
+  }
+
+  .arrowNext {
+    background-color: $color_icon;
+    right: -18px;
+  }
+
+  .carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 4) - 30px);
+    grid-gap: 16px;
+    overflow: hidden;
+
+    &.dragging {
+      .carousel-picture {
+        user-select: none;
+      }
+      // .carousel-link {
+      //   pointer-events: none;
+      // }
+    }
+
+    &.no-dragging {
+      .carousel-link {
+        pointer-events: auto;
+      }
+    }
+    .carousel-link {
+      pointer-events: auto;
+    }
+    &-link {
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto;
+    }
+
+    &-picture {
+      width: 100%;
+      height: 150px;
+      position: relative;
+      border-radius: 18px;
+      box-sizing: border-box;
+      background: #f5f5f6;
+      isolation: isolate;
+      display: flex;
+      margin-right: 20px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: background 0.5s ease;
+      &:hover {
+        background: #d5d5f3;
+      }
+    }
+
+    &-img {
+      width: 150px;
+      padding: 4px;
+      transition: transform 0.3s ease-in-out 0.3s;
+      &:hover {
+        transform: scale(1.04);
+      }
+    }
+    &-name {
+      text-align: center;
+      overflow-wrap: break-word;
+      min-width: 200px;
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1020px) {
+      grid-auto-columns: calc((100% / 3) - 30px);
+    }
+    @media (max-width: 700px) {
+      grid-auto-columns: calc((100% / 2) - 30px);
+    }
+  }
+}

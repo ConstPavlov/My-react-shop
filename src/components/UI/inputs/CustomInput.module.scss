@@ -1,0 +1,14 @@
+.CustomInput {
+  padding: 2px 14px;
+  height: 40px;
+  font-size: 18px;
+  display: inline-block;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  outline: none;
+  border: 1px solid #000;
+
+  &::placeholder {
+    color: black;
+  }
+}
