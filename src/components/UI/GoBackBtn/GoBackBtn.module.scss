@@ -1,0 +1,8 @@
+.goBackButton {
+  cursor: pointer;
+  color: rgb(74, 62, 91);
+  font-weight: bold;
+  &:hover {
+    opacity: 0.3;
+  }
+}

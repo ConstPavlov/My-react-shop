@@ -3,6 +3,7 @@ import React from 'react';
 import filter from './filter/slice';
 import cards from './cards/slice';
 import cart from './cart/slice';
+import auth from './auth/slice';
 import favorites from './favorites/slice';
 import { useDispatch } from 'react-redux';
 
@@ -11,7 +12,8 @@ export const store = configureStore({
     filter,
     cards,
     cart,
-    favorites
+    favorites,
+    auth,
   },
 });
 

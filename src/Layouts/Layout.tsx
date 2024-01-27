@@ -11,9 +11,7 @@ const Layout: React.FC = () => {
       <div className="content-wrapper">
         <div className="content">
           <Outlet />
-          
         </div>
-        
       </div>
     </div>
   );
