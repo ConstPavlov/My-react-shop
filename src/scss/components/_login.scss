@@ -30,4 +30,13 @@
   &__button {
     align-self: center;
   }
+
+  &__blueLink {
+    color: rgb(53, 53, 237);
+  }
+
+  .login__footer {
+    margin-top: 40px;
+    align-self: flex-end;
+  }
 }
