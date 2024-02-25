@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import CustomInput from './UI/inputs/CustomInput';
@@ -16,10 +16,23 @@ import { logOut } from '../redux/auth/slice';
 const HeaderLinks = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { quantityTovars } = useSelector((state: RootState) => state.cart);
+  const { quantityTovars, itemsCart } = useSelector((state: RootState) => state.cart);
+  const { itemsFavor } = useSelector((state: RootState) => state.favorites);
   const location = useLocation();
+  const isMounted = useRef(false);
 
   const isSignUp = useSelector(isAuth);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const jsonCartLS = JSON.stringify(itemsCart);
+      localStorage.setItem('cart', jsonCartLS);
+      const jsonFavorLS = JSON.stringify(itemsFavor);
+      localStorage.setItem('favorites', jsonFavorLS);
+    }
+    isMounted.current = true;
+  }, [itemsCart, itemsFavor]);
+
   console.log(isSignUp);
   const cartValidation = () => {
     if (isSignUp) {
@@ -31,6 +44,7 @@ const HeaderLinks = () => {
     dispatch(logOut());
     window.localStorage.removeItem('token');
   };
+
   React.useEffect(() => {}, [location]);
   return (
     <div className="fitches">
@@ -58,7 +72,9 @@ const HeaderLinks = () => {
         <div onClick={cartValidation}>
           <div className="header__cart header__icon-wrap">
             <ShoppingCartIcon />
-            {quantityTovars !== 0 && <div className="header__cartQuant">{quantityTovars}</div>}
+            {isSignUp && quantityTovars !== 0 && (
+              <div className="header__cartQuant">{quantityTovars}</div>
+            )}
           </div>
         </div>
       )}

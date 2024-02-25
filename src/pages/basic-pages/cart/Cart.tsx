@@ -2,17 +2,31 @@ import React, { useEffect } from 'react';
 import MyMiniButton from '../../../components/UI/buttons/mini-buttons/MyMiniButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { setTotalPrice, clearCart } from '../../../redux/cart/slice';
+import { setTotalPrice, clearCart, setTovarsFromLS } from '../../../redux/cart/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import BusketBlock from '../../../components/BusketBlock';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import { TItemCart } from '../../../redux/cart/types';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { totalPrice, itemsCart, quantityTovars } = useSelector((state: RootState) => state.cart);
+  // const [cartLS, setCartLS, removeitemLS] = useLocalStorage('cart', itemsCart);
+  // const [cartTotalPriceLS, setCartTotalPriceLS] = useLocalStorage('cart', totalPrice);
+  // console.log(cartLS);
   const onClickClear = () => {
     dispatch(clearCart());
+    // setCartLS([]);
   };
+
+  // useEffect(() => {
+  //   if (itemsCart.length > 0) {
+  //     setCartLS(itemsCart);
+  //   }
+
+  //   // dispatch(setTovarsFromLS(cartLS));
+  // }, [itemsCart, cartLS]);
 
   if (itemsCart.length === 0) {
     return <h1 style={{ marginBottom: '10px' }}>Это корзина и она пуста</h1>;
@@ -29,7 +43,7 @@ const Cart = () => {
         </div>
       </div>
       <div className="cart__tovars">
-        {itemsCart.map((item) => (
+        {itemsCart.map((item: TItemCart) => (
           <BusketBlock {...item} key={item.id} />
         ))}
       </div>

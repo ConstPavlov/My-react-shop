@@ -11,21 +11,23 @@ import {
   removeTovarToCart,
 } from '../../redux/cart/slice';
 import { addTovarToFavor } from '../../redux/favorites/slice';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const BusketBlock = ({ ...item }) => {
   const dispatch = useDispatch();
   const { totalPrice, itemsCart, quantityTovars } = useSelector((state: RootState) => state.cart);
+  const [cartLS, setCartLS] = useLocalStorage('cart', itemsCart);
   const addTovar = () => {
+    let newItem = {
+      id: item.id,
+      title: item.title,
+      imageUrl: item.imageUrl,
+      price: item.price,
+      count: 1,
+    };
+    // setCartLS([...cartLS, newItem]);
     //
-    dispatch(
-      addTovarToCart({
-        id: item.id,
-        title: item.title,
-        imageUrl: item.imageUrl,
-        price: item.price,
-        count: 1,
-      }),
-    );
+    dispatch(addTovarToCart(newItem));
     dispatch(setTotalPrice());
     dispatch(setquantityTovars());
   };
