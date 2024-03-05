@@ -2,6 +2,11 @@
 .favorites {
   padding: 0 10px;
   margin-bottom: 32px;
+
+  &__defaultBackground {
+    margin-top: 100px;
+    width: 50%;
+  }
   &__addToCart {
     position: relative;
     background-color: $color_icon;

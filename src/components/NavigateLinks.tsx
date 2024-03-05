@@ -10,7 +10,13 @@ import Sidebar from './Sidebar';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../redux/store';
 import { isAuth } from '../redux/auth/select';
-import { CART_ROUTE, FAVORITES_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
+import {
+  CART_ROUTE,
+  FAVORITES_ROUTE,
+  HOME_ROUTE,
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+} from '../utils/consts';
 import { logOut } from '../redux/auth/slice';
 
 const HeaderLinks = () => {
@@ -43,6 +49,7 @@ const HeaderLinks = () => {
   const handlerLogOut = () => {
     dispatch(logOut());
     window.localStorage.removeItem('token');
+    navigate(`${HOME_ROUTE}`);
   };
 
   React.useEffect(() => {}, [location]);

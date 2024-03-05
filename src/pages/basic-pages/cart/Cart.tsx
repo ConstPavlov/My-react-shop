@@ -8,6 +8,9 @@ import { RootState } from '../../../redux/store';
 import BusketBlock from '../../../components/BusketBlock';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { TItemCart } from '../../../redux/cart/types';
+// import cartBackground from '../../../assets/img/background-shop.png';
+import cartBackground from '../../../assets/img/logo.svg';
+import GoBackBtn from '../../../components/UI/GoBackBtn/GoBackBtn';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -29,11 +32,25 @@ const Cart = () => {
   // }, [itemsCart, cartLS]);
 
   if (itemsCart.length === 0) {
-    return <h1 style={{ marginBottom: '10px' }}>Это корзина и она пуста</h1>;
+    return (
+      <div
+        className="cart"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <GoBackBtn />
+        <h1 style={{ marginTop: '32px' }}>Корзина</h1>
+        <img className="cart__defaultBackground" src={cartBackground} alt="default-cart" />
+      </div>
+    );
   }
 
   return (
     <div className="cart">
+      <GoBackBtn />
       <h1 style={{ marginBottom: '10px' }}>Корзина</h1>
       <div className="cart__head">
         <MyMiniButton onClick={onClickClear}>Очистить все</MyMiniButton>
