@@ -22,6 +22,7 @@ import { IAllParamCard } from '../redux/cards/types';
 import { fetchData } from '../redux/cards/asyncAction';
 import { setCards } from '../redux/cards/slice';
 import { sortBy } from 'lodash';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 // https://64bcef922320b36433c74332.mockapi.io/items
 
@@ -34,11 +35,13 @@ interface ILayoutCardsPage {
   mainSection: { sub: string; title: string };
 }
 
-const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({ filterNames, mainSection }) => {
+const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({
+  filterNames,
+  mainSection,
+}) => {
   const dispatch = useAppDispatch();
-  const { category, checkedCurrent, filterStock, query, activeSort } = useSelector(
-    (state: RootState) => state.filter,
-  );
+  const { category, checkedCurrent, filterStock, query, activeSort } =
+    useSelector((state: RootState) => state.filter);
   const { cards, status } = useSelector((state: RootState) => state.cards);
   const handleChange = React.useCallback(
     (event: any) => {
@@ -126,7 +129,9 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({ filterNames, mainSection 
       console.log(localFilterNames);
       console.log('activateСheckbox был запуск ');
       const updateCheckbox = localFilterNames.map((fil: brandNamesType) => {
-        const matchedChbx = cardsData.some((card: IAllParamCard) => card.brand === fil.name);
+        const matchedChbx = cardsData.some(
+          (card: IAllParamCard) => card.brand === fil.name,
+        );
 
         if (matchedChbx) {
           fil.disabledChx = false;
@@ -144,12 +149,17 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({ filterNames, mainSection 
       const parseObj: ParsedQs = qs.parse(window.location.search.substring(1));
       console.log(parseObj);
 
-      const mathcedSort = sortNames.find((obj: sortNamesType) => obj.sort === parseObj.sortBy);
+      const mathcedSort = sortNames.find(
+        (obj: sortNamesType) => obj.sort === parseObj.sortBy,
+      );
       console.log(mathcedSort);
 
       dispatch(
         setAllFilters({
-          activeSort: mathcedSort || { name: 'Популярные(ASC)', sort: 'rating' },
+          activeSort: mathcedSort || {
+            name: 'Популярные(ASC)',
+            sort: 'rating',
+          },
           category: String(parseObj.brand),
           query: String(parseObj.searchQuery) || '',
         }),
@@ -228,7 +238,9 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({ filterNames, mainSection 
       <div className="content">
         <Sort
           value={activeSort}
-          setValue={(objSort: sortNamesType) => dispatch(setActiveSort(objSort))}
+          setValue={(objSort: sortNamesType) =>
+            dispatch(setActiveSort(objSort))
+          }
         />
         <div className="tovarsContainer">
           <h1 className="tovarsTitle">{mainSection.title}</h1>

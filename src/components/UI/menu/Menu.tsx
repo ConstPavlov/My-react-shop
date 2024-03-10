@@ -2,7 +2,7 @@ import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import ClearIcon from '@mui/icons-material/Clear';
-import CustonModal from './UI/modal/CustonModal';
+import CustonModal from '../modal/CustonModal';
 import { Link } from 'react-router-dom';
 
 const Menu = () => {

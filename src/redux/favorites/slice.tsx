@@ -1,25 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { remove } from 'lodash';
 import React from 'react';
+import { getFromLS } from '../../utils/getFromLS';
 import { RootState } from '../store';
 
+const [itemsFavor, totalPrice] = getFromLS('favorites');
 const initialState: any = {
-  itemsFavor: [],
-  totalPrice: 0,
+  itemsFavor,
+  totalPrice,
 };
 export const totalQuantity = (items: any) =>
   items.reduce((acc: number, card: any) => {
     return acc + card.count;
   }, 0);
-
-export const calcTotalPrice = (items: any) => {
-  if (items.length > 0) {
-    return items.reduce((acc: number, obj: any) => {
-      return obj.price * obj.count + acc;
-    }, 0);
-  }
-  return 0;
-};
 
 export const FavoritesSlice = createSlice({
   name: 'favorites',
@@ -39,6 +32,6 @@ export const FavoritesSlice = createSlice({
   },
 });
 
-export const {addTovarToFavor, removeFavor} = FavoritesSlice.actions;
+export const { addTovarToFavor, removeFavor } = FavoritesSlice.actions;
 
 export default FavoritesSlice.reducer;

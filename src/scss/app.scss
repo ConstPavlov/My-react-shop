@@ -16,6 +16,7 @@ body {
 .content-wrapper {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 100px;
   @media (max-width: 1346px) {
     justify-content: center;
     padding: 30px;

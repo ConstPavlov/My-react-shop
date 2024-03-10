@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react';
 import { Paper, TextField, Typography } from '@mui/material';
 import { jwtDecode } from 'jwt-decode';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import MyMiniButton from '../../components/UI/buttons/mini-buttons/MyMiniButton';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { fetchAuthLogin } from '../../redux/auth/asyncAction';
 import { IFormInputs } from '../../redux/auth/types';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { AppDispatch, useAppDispatch } from '../../redux/store';
-import { Link, useNavigate } from 'react-router-dom';
-import { isAuth } from '../../redux/auth/select';
-import { REGISTRATION_ROUTE } from '../../utils/consts';
-import { setUserInfo } from '../../redux/auth/slice';
+import { Link } from 'react-router-dom';
+import { LOGIN_ROUTE } from '../../utils/consts';
 
-const Login: React.FC = () => {
+const Registraton: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isSignUp = useSelector(isAuth);
-  const navigate = useNavigate();
 
   const {
     register,
@@ -25,6 +21,7 @@ const Login: React.FC = () => {
     setError,
   } = useForm({
     defaultValues: {
+      fullName: '',
       email: '',
       password: '',
     },
@@ -40,14 +37,7 @@ const Login: React.FC = () => {
           return alert('Не удалось войти');
         }
 
-        const token = data.payload;
-
-        window.localStorage.setItem('token', token);
-
-        const user = jwtDecode(token);
-        dispatch(setUserInfo(user));
-        console.log(user);
-        navigate('/');
+        window.localStorage.setItem('token', data.payload);
       }
     } catch (error) {
       console.warn(error, 'Не удалось сделать запрос');
@@ -61,9 +51,20 @@ const Login: React.FC = () => {
         <div className="login__inner">
           <form className="login__SignUpBlock">
             <Typography variant="h4" component="h3">
-              Вход в аккаунт
+              Регистрация аккаунта
             </Typography>
             <div className="login__inputs">
+              <TextField
+                className="login__field"
+                type="name"
+                id="outlined-basic-name"
+                label="Name"
+                variant="outlined"
+                fullWidth
+                error={Boolean(errors.fullName?.message)}
+                helperText={errors.fullName?.message}
+                {...register('fullName', { required: 'Введите пожалуйта имя' })}
+              />
               <TextField
                 className="login__field"
                 type="email"
@@ -93,9 +94,9 @@ const Login: React.FC = () => {
               </MyMiniButton>
             </div>
             <Typography className="login__footer" variant="body1" component="span">
-              У вас ещё нет аккаунта?{' '}
-              <Link className="login__blueLink" to={REGISTRATION_ROUTE}>
-                Зарегистрируйтесь
+              Есть аккаунт?{' '}
+              <Link className="login__blueLink" to={LOGIN_ROUTE}>
+                Войти!
               </Link>
             </Typography>
           </form>
@@ -105,4 +106,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Registraton;

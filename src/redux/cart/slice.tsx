@@ -1,31 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import React from 'react';
+import { calcTotalPrice } from '../../utils/calcTotalPrice';
+import { getFromLS } from '../../utils/getFromLS';
+import { totalQuantity } from '../../utils/totalQuantity';
 import { RootState } from '../store';
 import { Icart } from './types';
 
-const initialState: Icart = {
-  itemsCart: [],
-  totalPrice: 0,
-  quantityTovars: 0,
-};
-export const totalQuantity = (items: any) =>
-  items.reduce((acc: number, card: any) => {
-    return acc + card.count;
-  }, 0);
+const [itemsCart, totalPrice, quantityTovars] = getFromLS('cart');
 
-export const calcTotalPrice = (items: any) => {
-  if (items.length > 0) {
-    return items.reduce((acc: number, obj: any) => {
-      return obj.price * obj.count + acc;
-    }, 0);
-  }
-  return 0;
+const initialState: Icart = {
+  itemsCart,
+  totalPrice,
+  quantityTovars,
 };
 
 export const CartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    setTovarsFromLS: (state, action) => {
+      state.itemsCart = action.payload;
+    },
     setTotalPrice: (state) => {
       // state.itemsCart = action.payload;
       if (state.itemsCart) {
@@ -68,6 +63,7 @@ export const CartSlice = createSlice({
 });
 
 export const {
+  setTovarsFromLS,
   setTotalPrice,
   addTovarToCart,
   minusTovarToCart,

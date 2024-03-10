@@ -1,0 +1,15 @@
+.goBackButton {
+  margin-top: 10px;
+  padding: 4px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: border 0.7s ease 0s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.049);
+    padding: 4px;
+    border: 1px solid black;
+  }
+}
