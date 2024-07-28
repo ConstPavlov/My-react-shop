@@ -12,10 +12,12 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
+    "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.3",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
@@ -28,12 +30,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -48,6 +44,9 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.199"
+    "@types/lodash": "^4.14.199",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3"
   }
 }
