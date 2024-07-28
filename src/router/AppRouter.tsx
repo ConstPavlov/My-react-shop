@@ -8,7 +8,7 @@ import TelefonesAll from '../pages/phone-pages/TelefonesAll';
 import Smartfony from '../pages/Smartfony';
 import Kompyutery from '../pages/kompyutery-pages/Kompyutery';
 import { isAuth } from '../redux/auth/select';
-import { authRoutes, IRoutes, publicRoutes } from '../routes';
+import { authRoutes, IRoutes, publicRoutes } from './routes';
 import Televizory from '../pages/Televizory';
 import Honor from '../pages/phone-pages/phone-secondary/Honor';
 import Gadgets from '../pages/phone-pages/phone-secondary/Gadgets';
@@ -37,14 +37,20 @@ const AppRouter: React.FC = () => {
       </Route>
       // @ts-ignore
       <Route path="/" element={<TovarsLayout />}>
-        <Route path="noutbuki-planshety-i-kompyutery" element={<Kompyutery />} />
+        <Route
+          path="noutbuki-planshety-i-kompyutery"
+          element={<Kompyutery />}
+        />
         <Route path="televizory-i-video" element={<Televizory />} />
         <Route path="telefones" element={<TelefonesAll />} />
         <Route path="smartfony-i-svyaz" element={<Smartfony />} />
         <Route path="samsung" element={<Samsung />} />
         <Route path="honor" element={<Honor />} />
         <Route path="gadgets" element={<Gadgets />} />
-        <Route path="noutbuki-planshety-komputery-links" element={<LaptopLinks />} />
+        <Route
+          path="noutbuki-planshety-komputery-links"
+          element={<LaptopLinks />}
+        />
         <Route path="laptops" element={<LaptopsAll />} />
         <Route path="noutbuki-transformery" element={<LaptopsTransformery />} />
         <Route path="laptops-i-monitors" element={<LaptopsMonitorsLinks />} />

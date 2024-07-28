@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import filter from './filter/slice';
 import cards from './cards/slice';
+import myCards from './myCards/slice';
 import cart from './cart/slice';
 import auth from './auth/slice';
 import favorites from './favorites/slice';
@@ -14,6 +15,7 @@ export const store = configureStore({
     cart,
     favorites,
     auth,
+    myCards,
   },
 });
 

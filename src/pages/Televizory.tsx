@@ -1,19 +1,11 @@
 import React, { useCallback, useContext, useRef } from 'react';
-import axios from 'axios';
 
-import Categories from '../components/Categories';
-import Sidebar from '../components/Sidebar';
-import ChangeContext, { TypeChangeContext } from '../context/ChangeContext';
-import CardBlock from '../components/CardBlock';
-import Sort, { sortNamesType } from '../components/Sort';
-import LayoutCardsPage from '../Layouts/LayoutCardsPage';
-import { brandNamesType } from '../redux/filter/types';
-import BigSlider from '../components/UI/sliders/BigSlider';
-import Carousel from '../components/UI/sliders/Carousel';
+import FakeAds from '../components/UI/fake-ads/FakeAds';
+import Carousel from '../features/Carousel';
 
 // https://64bcef922320b36433c74332.mockapi.io/items
 
-const Kompyutery: React.FC = () => {
+const Televizory: React.FC = () => {
   const ComputerLinksForCarousel = [
     {
       path: '/televizory-i-cifrovoe-tv',
@@ -55,10 +47,10 @@ const Kompyutery: React.FC = () => {
       <h1 className="content__title">Телевизоры и цифровое ТВ</h1>
       <div>
         <Carousel arrProps={ComputerLinksForCarousel} />
-        <BigSlider />
+        <FakeAds />
       </div>
     </div>
   );
 };
 
-export default Kompyutery;
+export default Televizory;

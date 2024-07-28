@@ -1,11 +1,11 @@
 import React, { useCallback, useContext, useRef } from 'react';
 import axios from 'axios';
 import qs, { ParsedQs } from 'qs';
-import Categories from '../components/Categories';
+import Categories from '../features/Categories';
 import Sidebar from '../components/Sidebar';
 import ChangeContext, { TypeChangeContext } from '../context/ChangeContext';
 import CardBlock from '../components/CardBlock';
-import Sort, { sortNames, sortNamesType } from '../components/Sort';
+import Sort, { sortNames, sortNamesType } from '../features/Sort';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -23,6 +23,12 @@ import { fetchData } from '../redux/cards/asyncAction';
 import { setCards } from '../redux/cards/slice';
 import { sortBy } from 'lodash';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import {
+  fetchMyCards,
+  getBrands,
+  getTypes,
+} from '../redux/myCards/asyncAction';
+import { TypeMyCard } from '../redux/myCards/types';
 
 // https://64bcef922320b36433c74332.mockapi.io/items
 
@@ -43,6 +49,8 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({
   const { category, checkedCurrent, filterStock, query, activeSort } =
     useSelector((state: RootState) => state.filter);
   const { cards, status } = useSelector((state: RootState) => state.cards);
+  const serverMyCards = useSelector((state: RootState) => state.myCards.cards);
+
   const handleChange = React.useCallback(
     (event: any) => {
       const value = event.target.name;
@@ -54,7 +62,7 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({
   );
 
   const localFilterNames = [...filterNames];
-  const [data, setData] = React.useState<any>([]);
+  // const [data, setData] = React.useState<any>([]);
 
   const cardList = cards
     .filter(
@@ -88,27 +96,6 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({
   const orderForLink = activeSort.sort.includes('-') ? 'desc' : 'asc';
 
   const queryParam = query ? `&search=${query}` : '';
-
-  // Подготовка фильтров к ссылке конец
-
-  // const filteredStockFun = React.useCallback((dataCards: IAllParamCard[]) => {
-  //   if (isLaunched.current) {
-  //     const updateFilterCards = dataCards.forEach((card: IAllParamCard) => {
-  //       const filteredFilterNames = filterNames.map((filter: IfilterName, i: any) => {
-  //         if (card.brand === filter.name) {
-  //           filter.disabledChx = false;
-  //           console.log(`номер ${i + 1} Есть на складе`);
-  //           console.log(filter);
-  //         }
-  //         return filter;
-  //       });
-  //       return filteredFilterNames;
-  //     });
-
-  //     return updateFilterCards;
-  //   }
-  //   return filterNames;
-  // }, []);
 
   const resetFilters = React.useCallback(() => {
     dispatch(setCategory('Все'));
@@ -169,12 +156,18 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({
   }, []);
 
   React.useEffect(() => {
+    dispatch(fetchMyCards({ mainSection }));
+    getTypes();
+    getBrands();
+  }, []);
+
+  React.useEffect(() => {
     // if (isFirstRender.current) {
     let brand: string = !isFirstRender.current
       ? ''
       : currentBrand === 'Все'
-      ? ''
-      : `&brand=${category.toString()}`;
+        ? ''
+        : `&brand=${category.toString()}`;
 
     const fetching = async () => {
       // if (isFirstRender.current === false) {
@@ -245,8 +238,17 @@ const LayoutCardsPage: React.FC<ILayoutCardsPage> = ({
         <div className="tovarsContainer">
           <h1 className="tovarsTitle">{mainSection.title}</h1>
 
-          <div className="cards">
+          {/* <div className="cards">
             {!isFirstRender.current ? <h1>Идёт загрузка...</h1> : cardList}
+          </div> */}
+          <div className="cards">
+            {!isFirstRender.current ? (
+              <h1>Идёт загрузка...</h1>
+            ) : (
+              serverMyCards.map((item: any) => (
+                <CardBlock {...item} key={item.id} />
+              ))
+            )}
           </div>
         </div>
       </div>

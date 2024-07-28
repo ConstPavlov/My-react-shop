@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import BigSlider from '../../../../../components/UI/sliders/BigSlider';
-import Carousel from '../../../../../components/UI/sliders/Carousel';
+import FakeAds from '../../../../../components/UI/fake-ads/FakeAds';
+import Carousel from '../../../../../features/Carousel';
 
 const TelevizoryICifTv: React.FC = () => {
   const telLinksForCarousel = [
@@ -36,7 +36,7 @@ const TelevizoryICifTv: React.FC = () => {
         <h1 className="content__title">Телевизоры </h1>
         <div className="telefones__category">
           <Carousel arrProps={telLinksForCarousel} />
-          <BigSlider />
+          <FakeAds />
         </div>
       </div>
     </>

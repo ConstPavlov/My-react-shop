@@ -15,7 +15,7 @@ import { addTovarToFavor, removeFavor } from '../../redux/favorites/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-const CardBlock: React.FC<IAllParamCard> = ({ id, title, imageUrl, price }) => {
+const CardBlock: React.FC<any> = ({ id, name, imageUrl, price }) => {
   const { itemsFavor } = useSelector((state: RootState) => state.favorites);
 
   const foundItem = itemsFavor.find((item: any) => item.id === id);
@@ -23,7 +23,7 @@ const CardBlock: React.FC<IAllParamCard> = ({ id, title, imageUrl, price }) => {
   const dispatch = useDispatch();
   const addTovar = () => {
     //
-    dispatch(addTovarToCart({ id, title, imageUrl, price, count: 1 }));
+    dispatch(addTovarToCart({ id, name, imageUrl, price, count: 1 }));
     dispatch(setTotalPrice());
     dispatch(setquantityTovars());
   };
@@ -34,7 +34,9 @@ const CardBlock: React.FC<IAllParamCard> = ({ id, title, imageUrl, price }) => {
     dispatch(setquantityTovars());
   };
 
-  const changeFavorColor = foundItem ? ['card__favColor', 'inFavor'].join(' ') : 'card__favColor';
+  const changeFavorColor = foundItem
+    ? ['card__favColor', 'inFavor'].join(' ')
+    : 'card__favColor';
 
   const HandleAddToFavor = () => {
     if (foundItem) {
@@ -43,7 +45,7 @@ const CardBlock: React.FC<IAllParamCard> = ({ id, title, imageUrl, price }) => {
       dispatch(
         addTovarToFavor({
           id,
-          title,
+          name,
           imageUrl,
           price,
         }),
@@ -53,11 +55,15 @@ const CardBlock: React.FC<IAllParamCard> = ({ id, title, imageUrl, price }) => {
 
   return (
     <div className="card" key={id}>
-      <h1 className="card__title">{title}</h1>
+      <h1 className="card__title">{name}</h1>
 
       <div className="card__imgWrap">
         <StarsIcon onClick={HandleAddToFavor} className={changeFavorColor} />
-        <img className="card__img" src={imageUrl} alt="" />
+        <img
+          className="card__img"
+          src={process.env.REACT_APP_API_BASEURL + imageUrl}
+          alt=""
+        />
       </div>
 
       <div className="card__price">

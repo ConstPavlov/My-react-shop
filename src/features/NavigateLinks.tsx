@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import CustomInput from './UI/inputs/CustomInput';
+import CustomInput from '../components/UI/inputs/CustomInput';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Skeleton } from '@mui/material';
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../redux/store';
 import { isAuth } from '../redux/auth/select';
@@ -33,6 +33,12 @@ const HeaderLinks = () => {
 
   const isSignUp = useSelector(isAuth);
 
+  const handlerLogOut = () => {
+    dispatch(logOut());
+    window.localStorage.removeItem('token');
+    navigate(`${HOME_ROUTE}`);
+  };
+
   React.useEffect(() => {
     if (isMounted.current) {
       const jsonCartLS = JSON.stringify(itemsCart);
@@ -49,11 +55,6 @@ const HeaderLinks = () => {
       return navigate(`${CART_ROUTE}`);
     }
     return navigate(`${LOGIN_ROUTE}`);
-  };
-  const handlerLogOut = () => {
-    dispatch(logOut());
-    window.localStorage.removeItem('token');
-    navigate(`${HOME_ROUTE}`);
   };
 
   React.useEffect(() => {}, [location]);

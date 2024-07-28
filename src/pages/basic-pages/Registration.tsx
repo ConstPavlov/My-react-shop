@@ -4,15 +4,20 @@ import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import MyMiniButton from '../../components/UI/buttons/mini-buttons/MyMiniButton';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { fetchAuthLogin } from '../../redux/auth/asyncAction';
+import {
+  fetchAuthLogin,
+  fetchAuthRegistration,
+} from '../../redux/auth/asyncAction';
 import { IFormInputs } from '../../redux/auth/types';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { AppDispatch, useAppDispatch } from '../../redux/store';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../utils/consts';
+import { setUserInfo } from '../../redux/auth/slice';
 
 const Registraton: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -31,13 +36,18 @@ const Registraton: React.FC = () => {
     try {
       if (values) {
         console.log(values);
-        const data = await dispatch(fetchAuthLogin(values));
+        const data = await dispatch(fetchAuthRegistration(values));
         console.log(data);
         if (!data.payload) {
           return alert('Не удалось войти');
         }
+        const token = data.payload;
 
         window.localStorage.setItem('token', data.payload);
+        const user = jwtDecode(token);
+        dispatch(setUserInfo(user));
+        console.log(user);
+        navigate('/');
       }
     } catch (error) {
       console.warn(error, 'Не удалось сделать запрос');
@@ -85,7 +95,9 @@ const Registraton: React.FC = () => {
                 fullWidth
                 error={Boolean(errors.password?.message)}
                 helperText={errors ? errors.password?.message : ''}
-                {...register('password', { required: 'Введите пожалуйта password' })}
+                {...register('password', {
+                  required: 'Введите пожалуйта password',
+                })}
               />
             </div>
             <div className="login__button">
@@ -93,7 +105,11 @@ const Registraton: React.FC = () => {
                 Войти
               </MyMiniButton>
             </div>
-            <Typography className="login__footer" variant="body1" component="span">
+            <Typography
+              className="login__footer"
+              variant="body1"
+              component="span"
+            >
               Есть аккаунт?{' '}
               <Link className="login__blueLink" to={LOGIN_ROUTE}>
                 Войти!

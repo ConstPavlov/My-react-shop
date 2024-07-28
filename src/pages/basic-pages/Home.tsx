@@ -1,30 +1,22 @@
 import { jwtDecode } from 'jwt-decode';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchAuthCheck } from '../../redux/auth/asyncAction';
+import MenuMain from '../../features/menu-main/MenuMain';
+import { fetchMyCards } from '../../redux/myCards/asyncAction';
 import { RootState, useAppDispatch } from '../../redux/store';
+import { getUserInfo } from '../../utils/getUserInfo';
 
 const Home: React.FC = () => {
-  const { userInfo, user } = useSelector((state: RootState) => state.auth);
-  const dispatch = useAppDispatch();
-  const [info, setInfo] = React.useState<any>(null);
+  const { user } = useSelector((state: RootState) => state.auth);
+  const info = getUserInfo();
 
-  React.useEffect(() => {
-    if (user) {
-      const decode = jwtDecode(user);
-      setInfo(decode);
-    } else {
-      setInfo(null);
-    }
-    console.log(user);
-  }, [user]);
-  console.log(info);
+  const BASE_URL = process.env.REACT_APP_API_URL;
+  console.log(BASE_URL);
   return (
     <div className="container">
       <div className="home">
         <h1>Home Page</h1>
-        <p>В будущем тут будут слайдеры и баннеры</p>
-        <ul className="myInfo">{info ? <li>Мой email: {info.email}</li> : 'тут пока пусто'}</ul>
+        <div className="home__container">{<MenuMain />}</div>
       </div>
     </div>
   );

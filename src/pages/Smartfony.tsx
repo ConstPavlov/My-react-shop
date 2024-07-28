@@ -1,11 +1,11 @@
 import React, { useCallback, useContext, useRef } from 'react';
 import axios from 'axios';
 
-import Categories from '../components/Categories';
+import Categories from '../features/Categories';
 import Sidebar from '../components/Sidebar';
 import ChangeContext, { TypeChangeContext } from '../context/ChangeContext';
 import CardBlock from '../components/CardBlock';
-import Sort, { sortNamesType } from '../components/Sort';
+import Sort, { sortNamesType } from '../features/Sort';
 import LayoutCardsPage from '../Layouts/LayoutCardsPage';
 import { brandNamesType } from '../redux/filter/types';
 
@@ -23,7 +23,10 @@ const Smartfony = () => {
   ];
   return (
     <>
-      <LayoutCardsPage filterNames={brandTelefonNames} mainSection={mainObjectSection} />{' '}
+      <LayoutCardsPage
+        filterNames={brandTelefonNames}
+        mainSection={mainObjectSection}
+      />{' '}
     </>
   );
 };

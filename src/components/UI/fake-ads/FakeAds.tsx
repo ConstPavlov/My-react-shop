@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BigSlider: React.FC = () => {
+const FakeAds: React.FC = () => {
   return (
     <div className="big-slider">
       <div className="big-slider__slide">
@@ -14,4 +14,4 @@ const BigSlider: React.FC = () => {
   );
 };
 
-export default BigSlider;
+export default FakeAds;

@@ -4,6 +4,8 @@ interface ILocSt<T, U> {
   (key: T, initialValue: U): any;
 }
 
+
+
 export const useLocalStorage: ILocSt<string, any> = (key: string, initialValue: any): any => {
   const [value, setValue] = useState<any>(() => {
     try {
