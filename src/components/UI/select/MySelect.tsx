@@ -8,7 +8,7 @@ import { TypeTypes } from '../../../redux/myCards/types';
 
 interface TypeProps<T> {
   list: TypeTypes[];
-  current: string;
+  current: { id: number; name: string };
   onSetCur: (v: any) => void;
 }
 
@@ -19,12 +19,18 @@ const MySelect = React.memo(<T,>({ list, current, onSetCur }: TypeProps<T>) => {
     setValues(list);
   }, []);
 
-  console.log(list);
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    const selectedName = event.target.value;
+    const selectedOption = list.find(item => item.name === selectedName);
+    if (selectedOption) {
+      onSetCur(selectedOption);
+    }
+  };
   return (
     <FormControl sx={{ m: 1, minWidth: 220 }}>
       <Select
-        value={current}
-        onChange={(event: SelectChangeEvent) => onSetCur(event.target.value)}
+        value={current.name}
+        onChange={handleChange}
         displayEmpty
         inputProps={{ 'aria-label': 'Without label' }}
       >
