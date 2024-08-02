@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import CreateCardModal from '../../features/adminActions/CreateCardModal';
 
 const Admin = () => {
   return (
-    <div>Admin</div>
-  )
-}
+    <div>
+      ADMIN PAGE WELCOME!
+      <div>
+        <CreateCardModal />
+      </div>
+    </div>
+  );
+};
 
-export default Admin
+export default Admin;

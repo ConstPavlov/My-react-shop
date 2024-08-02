@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../components/Header/Header';
-import MenuBottom from '../components/UI/menu-bottom/MenuBottom';
+import Header from '../widgets/Header/Header';
+import MenuBottom from '../features/menu-bottom/MenuBottom';
 
 const Layout: React.FC = () => {
   return (

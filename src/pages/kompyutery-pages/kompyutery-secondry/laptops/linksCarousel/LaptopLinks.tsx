@@ -2,8 +2,8 @@ import React, { useCallback, useContext, useRef } from 'react';
 import axios from 'axios';
 
 import LayoutCardsPage from '../../../../../Layouts/LayoutCardsPage';
-import Carousel from '../../../../../components/UI/sliders/Carousel';
-import BigSlider from '../../../../../components/UI/sliders/BigSlider';
+import Carousel from '../../../../../features/Carousel';
+import FakeAds from '../../../../../components/UI/fake-ads/FakeAds';
 
 // https://64bcef922320b36433c74332.mockapi.io/items
 
@@ -24,12 +24,14 @@ const LaptopLinks = () => {
     {
       path: '/laptops',
       name: 'Ноутбуки',
-      imgUrl: '	https://static.mvideo.ru/media/Assets/img/pc/noutbuki-220x220.jpg',
+      imgUrl:
+        '	https://static.mvideo.ru/media/Assets/img/pc/noutbuki-220x220.jpg',
     },
     {
       path: '/noutbuki-transformery',
       name: 'Ноутбуки-трансформеры',
-      imgUrl: 'https://static.mvideo.ru/media/Assets/img/noutbuki-transformery-220x220.jpg',
+      imgUrl:
+        'https://static.mvideo.ru/media/Assets/img/noutbuki-transformery-220x220.jpg',
     },
     {
       path: '/planshety',
@@ -39,7 +41,8 @@ const LaptopLinks = () => {
     {
       path: '/sistemnye-bloki',
       name: 'Системные блоки',
-      imgUrl: 'https://static.mvideo.ru/media/Assets/img/sistemnye-bloki-220x220.jpg',
+      imgUrl:
+        'https://static.mvideo.ru/media/Assets/img/sistemnye-bloki-220x220.jpg',
     },
 
     {
@@ -69,7 +72,7 @@ const LaptopLinks = () => {
       <h1 className="content__title">Ноутбуки и компьютерная техника</h1>
       <div>
         <Carousel arrProps={ComputerLinksForCarousel} />
-        <BigSlider />
+        <FakeAds />
       </div>
     </div>
   );

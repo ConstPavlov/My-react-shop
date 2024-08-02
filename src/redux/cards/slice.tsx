@@ -10,32 +10,31 @@ const initialState: Icard = {
 };
 
 export const Tovarsslice = createSlice({
-  name: 'tovars',
+  name: 'cards',
   initialState,
   reducers: {
     setCards: (state, action) => {
-      state.cards = action.payload
-    }
+      state.cards = action.payload;
+    },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      state.cards = action.payload
-      state.status = Status.SUCCESS
-      console.log(action, 'SUCCESS')
-    })
+      state.cards = action.payload;
+      state.status = Status.SUCCESS;
+      console.log(action, 'SUCCESS');
+    });
     builder.addCase(fetchData.pending, (state, action) => {
-      state.cards = []
-      state.status = Status.LOADING
-      console.log(action, 'LOADING')
-    })
+      state.cards = [];
+      state.status = Status.LOADING;
+      console.log(action, 'LOADING');
+    });
     builder.addCase(fetchData.rejected, (state, action) => {
-      state.cards = []
-      state.status = Status.ERROR
-
-    })
-  }
+      state.cards = [];
+      state.status = Status.ERROR;
+    });
+  },
 });
 
-export const {setCards} = Tovarsslice.actions;
+export const { setCards } = Tovarsslice.actions;
 
 export default Tovarsslice.reducer;

@@ -6,15 +6,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../../redux/store';
-import { isAuth } from '../../../redux/auth/select';
+import { RootState, useAppDispatch } from '../../redux/store';
+import { isAuth } from '../../redux/auth/select';
 import {
   CART_ROUTE,
   FAVORITES_ROUTE,
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
-} from '../../../utils/consts';
-import { logOut } from '../../../redux/auth/slice';
+} from '../../utils/consts';
+import { logOut } from '../../redux/auth/slice';
 
 const MenuBottom: React.FC = () => {
   const navigate = useNavigate();
@@ -38,7 +38,10 @@ const MenuBottom: React.FC = () => {
   return (
     <div className="menu-bottom__container">
       {isSignUp ? (
-        <div onClick={handlerLogOut} className="menu-bottom__icon-wrap menu-bottom__logout">
+        <div
+          onClick={handlerLogOut}
+          className="menu-bottom__icon-wrap menu-bottom__logout"
+        >
           <LogoutIcon className="login-ico__pic " />
         </div>
       ) : (
@@ -59,7 +62,9 @@ const MenuBottom: React.FC = () => {
         <div onClick={cartValidation}>
           <div className="menu-bottom__cart menu-bottom__icon-wrap">
             <ShoppingCartIcon />
-            {quantityTovars !== 0 && <div className="menu-bottom__cartQuant">{quantityTovars}</div>}
+            {quantityTovars !== 0 && (
+              <div className="menu-bottom__cartQuant">{quantityTovars}</div>
+            )}
           </div>
         </div>
       }

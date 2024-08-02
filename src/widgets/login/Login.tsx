@@ -56,52 +56,46 @@ const Login: React.FC = () => {
 
   useEffect(() => {}, []);
   return (
-    <div className="login">
-      <div className="login__wrapper">
-        <div className="login__inner">
-          <form className="login__SignUpBlock">
-            <Typography variant="h4" component="h3">
-              Вход в аккаунт
-            </Typography>
-            <div className="login__inputs">
-              <TextField
-                className="login__field"
-                type="email"
-                id="outlined-basic-email"
-                label="Email"
-                variant="outlined"
-                fullWidth
-                error={Boolean(errors.email?.message)}
-                helperText={errors.email?.message}
-                {...register('email', { required: 'Введите пожалуйта email' })}
-              />
-              <TextField
-                className="login__field"
-                type="password"
-                id="outlined-basic-password"
-                label="Password"
-                variant="outlined"
-                fullWidth
-                error={Boolean(errors.password?.message)}
-                helperText={errors ? errors.password?.message : ''}
-                {...register('password', { required: 'Введите пожалуйта password' })}
-              />
-            </div>
-            <div className="login__button">
-              <MyMiniButton type="submit" onClick={handleSubmit(onSubmit)}>
-                Войти
-              </MyMiniButton>
-            </div>
-            <Typography className="login__footer" variant="body1" component="span">
-              У вас ещё нет аккаунта?{' '}
-              <Link className="login__blueLink" to={REGISTRATION_ROUTE}>
-                Зарегистрируйтесь
-              </Link>
-            </Typography>
-          </form>
-        </div>
+    <form className="login__SignUpBlock">
+      <Typography variant="h4" component="h3">
+        Вход в аккаунт
+      </Typography>
+      <div className="login__inputs">
+        <TextField
+          className="login__field"
+          type="email"
+          id="outlined-basic-email"
+          label="Email"
+          variant="outlined"
+          fullWidth
+          error={Boolean(errors.email?.message)}
+          helperText={errors.email?.message}
+          {...register('email', { required: 'Введите пожалуйта email' })}
+        />
+        <TextField
+          className="login__field"
+          type="password"
+          id="outlined-basic-password"
+          label="Password"
+          variant="outlined"
+          fullWidth
+          error={Boolean(errors.password?.message)}
+          helperText={errors ? errors.password?.message : ''}
+          {...register('password', { required: 'Введите пожалуйта password' })}
+        />
       </div>
-    </div>
+      <div className="login__button">
+        <MyMiniButton type="submit" onClick={handleSubmit(onSubmit)}>
+          Войти
+        </MyMiniButton>
+      </div>
+      <Typography className="login__footer" variant="body1" component="span">
+        У вас ещё нет аккаунта?{' '}
+        <Link className="login__blueLink" to={REGISTRATION_ROUTE}>
+          Зарегистрируйтесь
+        </Link>
+      </Typography>
+    </form>
   );
 };
 

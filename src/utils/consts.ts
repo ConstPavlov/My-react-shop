@@ -20,3 +20,4 @@ export const SISBLOKS_ROUTE = '/sistemnye-bloki';
 export const TELEICTV_ROUTE = '/televizory-i-cifrovoe-tv';
 export const TELEVIZORYALL_ROUTE = '/televizory-all';
 export const TELE4K_ROUTE = '/televizory-4k';
+export const PROFILE_ROUTE = '/profile';

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Categories from '../components/Categories';
-import Header from '../components/Header/Header';
-import MenuBottom from '../components/UI/menu-bottom/MenuBottom';
+import Categories from '../features/Categories';
+import Header from '../widgets/Header/Header';
+import MenuBottom from '../features/menu-bottom/MenuBottom';
 import ChangeContext from '../context/ChangeContext';
 
 const TovarsLayout: React.FC = () => {

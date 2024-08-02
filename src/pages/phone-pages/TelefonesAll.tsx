@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import Carousel from '../../components/UI/sliders/Carousel';
-import Categories from '../../components/Categories';
+import Carousel from '../../features/Carousel';
+import Categories from '../../features/Categories';
 import Sidebar from '../../components/Sidebar';
-import BigSlider from '../../components/UI/sliders/BigSlider';
+import FakeAds from '../../components/UI/fake-ads/FakeAds';
 
 const TelefonesAll: React.FC = () => {
   const telLinksForCarousel = [
@@ -19,7 +19,8 @@ const TelefonesAll: React.FC = () => {
     {
       path: '/honor',
       name: 'HONOR',
-      imgUrl: 'https://static.mvideo.ru/media/Assets/img/catalog/telefony/honor-220x220.jpg',
+      imgUrl:
+        'https://static.mvideo.ru/media/Assets/img/catalog/telefony/honor-220x220.jpg',
     },
     {
       path: '/gadgets',
@@ -38,13 +39,11 @@ const TelefonesAll: React.FC = () => {
         <h1 className="content__title">Телефоны</h1>
         <div className="telefones__category">
           <Carousel arrProps={telLinksForCarousel} />
-          <BigSlider />
+          <FakeAds />
         </div>
       </div>
     </>
   );
 };
-
-
 
 export default TelefonesAll;

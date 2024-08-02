@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import React from 'react';
 import { Status } from '../cards/types';
-import { fetchAuthLogin, fetchAuthCheck } from './asyncAction';
+import {
+  fetchAuthLogin,
+  fetchAuthCheck,
+  fetchAuthRegistration,
+} from './asyncAction';
 import { IAuth } from './types';
 
 const initialState: IAuth = {
@@ -35,7 +39,20 @@ const AuthSlice = createSlice({
       state.status = Status.ERROR;
     });
 
-    builder.addCase(fetchAuthCheck.pending, (state, acton) => {
+    builder.addCase(fetchAuthRegistration.pending, (state, acton) => {
+      state.user = null;
+      state.status = Status.LOADING;
+    });
+    builder.addCase(fetchAuthRegistration.fulfilled, (state, acton) => {
+      state.user = acton.payload;
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(fetchAuthRegistration.rejected, (state, acton) => {
+      state.user = null;
+      state.status = Status.ERROR;
+    });
+
+    builder.addCase(fetchAuthCheck.pending, state => {
       state.user = null;
       state.status = Status.LOADING;
     });
